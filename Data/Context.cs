@@ -9,6 +9,6 @@ namespace OnosFlow.Data
         {
         }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<Config> Configs { get; set; }
     }
 }

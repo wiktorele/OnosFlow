@@ -19,40 +19,40 @@ namespace OnosFlow.Controllers
        
         public IActionResult Index()
         {
-            var any= !_context.Users.Any();
+            var any= !_context.Configs.Any();
 
-            if (!_context.Users.Any())
+            if (!_context.Configs.Any())
             {
-                return RedirectToAction("CreateUser");
+                return RedirectToAction("CreateConfig");
             }
             else
             {
-                var user =_context.Users.First();
-                return View(user);
+                var config =_context.Configs.First();
+                return View(config);
             }
 
         }
 
-        public async Task<IActionResult> CreateUser(User user)
+        public async Task<IActionResult> CreateConfig(Config config)
         {
             if (!ModelState.IsValid)
             {
-                return View(user);
+                return View(config);
             }
 
-            if(!_context.Users.Any())
+            if(!_context.Configs.Any())
             {
-                _context.Add(user);
+                _context.Add(config);
             }
             else
             {
-                var oldUser = _context.Users.First();
+                var oldConfig = _context.Configs.First();
                 
-                oldUser.UserName = user.UserName;
-                oldUser.Password = user.Password;
-                oldUser.IpAddress = user.IpAddress;
+                oldConfig.UserName = config.UserName;
+                oldConfig.Password = config.Password;
+                oldConfig.IpAddress = config.IpAddress;
 
-                _context.Users.Update(oldUser);
+                _context.Configs.Update(oldConfig);
             }
 
             int isSuccess = _context.SaveChanges();
