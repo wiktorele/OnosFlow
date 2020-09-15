@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnosFlow.Data;
+using OnosFlow.Models;
 
 namespace OnosFlow
 {
@@ -20,11 +21,11 @@ namespace OnosFlow
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Context>(opt => opt.UseInMemoryDatabase("InMemoryDb"));
+            services.AddDbContext<Context>(opt => opt.UseInMemoryDatabase("Users"));
+            //services.AddSingleton<IUser, User>();
 
             services.AddControllersWithViews();
             services.AddHttpClient();
-            //services.AddHttpClient("onos", c => c.BaseAddress = new Uri("http://onos:rocks@192.168.56.120:8181"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text.Json;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore.Internal;
 using OnosFlow.Data;
 using OnosFlow.Models;
 
@@ -14,6 +10,7 @@ namespace OnosFlow.Controllers
     public class HomeController : Controller
     {
         private readonly Context _context;
+        //private readonly IUser _user;
 
         public HomeController(Context context)
         {
@@ -22,26 +19,50 @@ namespace OnosFlow.Controllers
        
         public IActionResult Index()
         {
-            return View();
+            var any= !_context.Users.Any();
+
+            if (!_context.Users.Any())
+            {
+                return RedirectToAction("CreateUser");
+            }
+            else
+            {
+                var user =_context.Users.First();
+                return View(user);
+            }
+
         }
 
         public async Task<IActionResult> CreateUser(User user)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(user);
             }
 
-            await _context.AddAsync(user);
+            if(!_context.Users.Any())
+            {
+                _context.Add(user);
+            }
+            else
+            {
+                var oldUser = _context.Users.First();
+                
+                oldUser.UserName = user.UserName;
+                oldUser.Password = user.Password;
+                oldUser.IpAddress = user.IpAddress;
 
-            int isSuccess = await _context.SaveChangesAsync();
+                _context.Users.Update(oldUser);
+            }
 
-            if(!(isSuccess > 0))
+            int isSuccess = _context.SaveChanges();
+
+            if (!(isSuccess > 0))
             {
                 ModelState.AddModelError("", "Error");
             }
 
-            return View(user);
+            return RedirectToAction("Index");
         }
 
 
