@@ -1,5 +1,6 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿
+using System.Linq;
+using System.Net.NetworkInformation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
 using OnosFlow.Data;
@@ -10,7 +11,6 @@ namespace OnosFlow.Controllers
     public class HomeController : Controller
     {
         private readonly Context _context;
-        //private readonly IUser _user;
 
         public HomeController(Context context)
         {
@@ -19,7 +19,6 @@ namespace OnosFlow.Controllers
        
         public IActionResult Index()
         {
-            var any= !_context.Configs.Any();
 
             if (!_context.Configs.Any())
             {
@@ -33,7 +32,14 @@ namespace OnosFlow.Controllers
 
         }
 
-        public async Task<IActionResult> CreateConfig(Config config)
+        [HttpGet]
+        public IActionResult CreateConfig()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateConfig(Config config)
         {
             if (!ModelState.IsValid)
             {
@@ -62,9 +68,43 @@ namespace OnosFlow.Controllers
                 ModelState.AddModelError("", "Error");
             }
 
-            return RedirectToAction("Index");
+            if (PingController(config))
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("CannotConnectToController");
+            }
         }
 
+        public static bool PingController(Config config)
+        {
+            bool pingable = false;
+            Ping pinger = null;
 
+            try
+            {
+                pinger = new Ping();
+                PingReply reply = pinger.Send(config.IpAddress);
+                pingable = reply.Status == IPStatus.Success;
+            }
+            catch (PingException)
+            {
+            }
+            finally
+            {
+                if (pinger != null)
+                {
+                    pinger.Dispose();
+                }
+            }
+
+            return pingable;
+        }
+        public IActionResult CannotConnectToController()
+        {
+            return View();
+        }
     }
 }

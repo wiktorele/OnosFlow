@@ -55,8 +55,8 @@ namespace OnosFlow.Controllers
 
             flowModel = await JsonSerializer.DeserializeAsync<IEnumerable<FlowModel>>(responseBody);
 
-            ViewData["Response"] = responseBody;
-            //ViewData["Flow"] = flowModel;
+            //ViewData["Response"] = responseBody;
+            ViewData["Flow"] = flowModel;
 
             return View(flowModel);
         }
