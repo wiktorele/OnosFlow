@@ -21,8 +21,8 @@ namespace OnosFlow
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Context>(opt => opt.UseInMemoryDatabase("Users"));
-            //services.AddSingleton<IUser, User>();
+            //services.AddDbContext<Context>(opt => opt.UseInMemoryDatabase("Configs"));
+            services.AddSingleton<IConfig, Config>();
 
             services.AddControllersWithViews();
             services.AddHttpClient();

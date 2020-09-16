@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OnosFlow.Models
 {
-    interface IConfig
+    public interface IConfig
     {
         public int Id { get; set; }
         public string UserName { get; set; }
