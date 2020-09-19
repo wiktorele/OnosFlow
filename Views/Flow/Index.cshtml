@@ -1,11 +1,48 @@
-﻿@{
-    ViewData["Title"] = "Index";
+﻿@model OnosFlow.Models.FlowModel
+
+@{
+    ViewData["Title"] = "Flows";
+} 
+
+<h1>Flow table</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Priority</th>
+            <th>Timeout</th>
+            <th>DeviceId</th>
+            <th>State</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.flows) {
+        <tr>
+            <td>
+                @item.id
+            </td>
+            <td>
+                @item.priority
+            </td>
+            <td>
+                @item.timeout
+            </td>
+            <td>
+                @item.deviceId
+            </td>
+            <td>
+                @item.state
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id}) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.id})
+            </td>
+        </tr>
 }
-<h2>Index</h2>
-
-<p>Flow view Template</p>
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-
-
+    </tbody>
+</table>

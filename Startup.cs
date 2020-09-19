@@ -5,12 +5,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnosFlow.Data;
-using OnosFlow.Models;
+using System;
 
 namespace OnosFlow
 {
     public class Startup
     {
+        string url = "http://192.168.56.120:8181/onos/";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -24,7 +25,10 @@ namespace OnosFlow
             services.AddDbContext<Context>(opt => opt.UseInMemoryDatabase("Configs"));
             //services.AddSingleton<IConfig, Config>(); //usage of config ass a singleton
             services.AddControllersWithViews();
-            services.AddHttpClient();
+            services.AddHttpClient("onosBase", client => { 
+                client.BaseAddress = new Uri(url);
+                client.DefaultRequestHeaders.Clear();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
