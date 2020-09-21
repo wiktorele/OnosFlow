@@ -1,7 +1,7 @@
 ﻿
 namespace OnosFlow.Models
 {
-    public partial class FlowModel
+    public class FlowModel
     {
         public Flow[] flows { get; set; }
 
@@ -12,6 +12,7 @@ namespace OnosFlow.Models
             public int timeout { get; set; }
             public string deviceId { get; set; }
             public string state { get; set; }
+
             //public Treatment treatment { get; set; }
             //public Selector selector { get; set; }
         }

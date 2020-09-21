@@ -68,7 +68,7 @@ namespace OnosFlow.Controllers
                 ModelState.AddModelError("", "Error");
             }
 
-            if (PingController(config))
+            if (PingAction(config))
             {
                 return RedirectToAction("Index");
             }
@@ -78,7 +78,7 @@ namespace OnosFlow.Controllers
             }
         }
 
-        public static bool PingController(Config config)
+        public static bool PingAction(Config config)
         {
             bool pingable = false;
             Ping pinger = null;
@@ -102,6 +102,7 @@ namespace OnosFlow.Controllers
 
             return pingable;
         }
+
         public IActionResult CannotConnectToController()
         {
             return View();
