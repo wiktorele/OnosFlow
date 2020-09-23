@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace OnosFlow.Models
@@ -51,25 +52,32 @@ namespace OnosFlow.Models
             return responseBody;
         }
 
-        public async Task<HttpResponseMessage> DeleteFlow(string deviceId, string flowId)
-        {
-            var response = await Client.DeleteAsync($"v1/flows/{deviceId}/{flowId}");
-
-            response.EnsureSuccessStatusCode();
-
-            return response;
-        }
-
-        public async Task<HttpResponseMessage> GetFlow(string deviceId, string flowId)
+        //parse response from json and display in view
+        public async Task<FlowModel> GetFlow(string deviceId, string flowId)
         {
             var response = await Client.GetAsync($"v1/flows/{deviceId}/{flowId}");
-
             response.EnsureSuccessStatusCode();
 
-            var responseBody = await response.Content.ReadFromJsonAsync<FlowModel>();//??????????????????????
+            var responseBody = await response.Content.ReadFromJsonAsync<FlowModel>();
 
-            return response;
+            return responseBody;
         }
+
+        //public async Task<FlowModel> CreateFlow(string deviceId)
+        //{
+        //    var postFlow = new FlowModel
+        //    {
+        //        flows = {}
+        //    };
+        //    var request.Content = new StringContent(JsonSerializer.Serialize(new FlowModel() { flows = { } }));
+        //    var response = await Client.PostAsJsonAsync($"v1/flows/{deviceId}", postFlow);
+
+        //    response.EnsureSuccessStatusCode();
+            
+        //    var postResponse = await response.Content.ReadFromJsonAsync<FlowModel>();
+
+        //    return postResponse;
+        //}
 
         //public async Task<HttpResponseMessage> UpdateFlow(string deviceId, string flowId)
         //{
@@ -80,14 +88,14 @@ namespace OnosFlow.Models
         //    return response;
         //}
 
-        //public async Task<HttpResponseMessage> CreateFlow(string deviceId)
-        //{
-        //    var response = await Client.DeleteAsync($"v1/flows/{deviceId}/{flowId}");
+        public async Task<HttpResponseMessage> DeleteFlow(string deviceId, string flowId)
+        {
+            var response = await Client.DeleteAsync($"v1/flows/{deviceId}/{flowId}");
 
-        //    response.EnsureSuccessStatusCode();
+            response.EnsureSuccessStatusCode();
 
-        //    return response;
-        //}
+            return response;
+        }
 
     }
 }

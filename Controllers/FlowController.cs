@@ -44,7 +44,7 @@ namespace OnosFlow.Controllers
             }
             catch (HttpRequestException e)
             {
-                if(e.Message == "Response status code does not indicate success: 401 (Unauthorized).")
+                if (e.Message == "Response status code does not indicate success: 401 (Unauthorized).")
                 {
                     return RedirectToAction("UnauthorizedRequest");
                 }
@@ -57,10 +57,65 @@ namespace OnosFlow.Controllers
             }
         }
 
+        public async Task<IActionResult> Details(string deviceId, string flowId)
+        {
+            try
+            {
+                var getFlow = await _onosService.GetFlow(deviceId, flowId);
+                var flow = getFlow.flows[0];
+                return View(flow);
+            }
+            catch (HttpRequestException e)
+            {
+                if (e.Message == "Response status code does not indicate success: 401 (Unauthorized).")
+                {
+                    return RedirectToAction("UnauthorizedRequest");
+                }
+                else
+                {
+                    string error = e.Message;
+                    string errorString = $"There was an error getting flows: { error }";
+                    return Content(errorString);
+                }
+            }
+            return View();
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Create(string deviceId, FlowModel flow)
+        //{
+        //    try
+        //    {
+        //        var createFlow = _onosService.CreateFlow(flow.flows)
+        //        var createFlow = await _onosService.CreateFlow(deviceId);
+        //                    return View(createFlow);
+        //    }
+        //    catch (HttpRequestException e)
+        //    {
+        //        if (e.Message == "Response status code does not indicate success: 401 (Unauthorized).")
+        //        {
+        //            return RedirectToAction("UnauthorizedRequest");
+        //        }
+        //        else
+        //        {
+        //            string error = e.Message;
+        //            string errorString = $"There was an error getting flows: { error }";
+        //            return Content(errorString);
+        //        }
+        //    }
+        //}
+
+        public async Task<IActionResult> Edit(string deviceId)
+        {
+
+            return View();
+        }
+
         public async Task<IActionResult> Delete(string deviceId, string flowId)
         {
             try
             {
+                ViewData["flowId"] = flowId;
                 var deleteFlow = await _onosService.DeleteFlow(deviceId, flowId);
                 return View(deleteFlow);
             }
@@ -77,22 +132,6 @@ namespace OnosFlow.Controllers
                     return Content(errorString);
                 }
             }
-        }
-
-        public async Task<IActionResult> Create(string deviceId)
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> Details(string deviceId, string flowId)
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> Edit(string deviceId, string flowId)
-        {
-
-            return View();
         }
 
         public IActionResult Privacy()
