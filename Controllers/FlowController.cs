@@ -24,17 +24,14 @@ namespace OnosFlow.Controllers
         private readonly OnosService _onosService;
         public IEnumerable<FlowModel> flowModel { get; set; }
         private readonly ILogger<FlowController> _logger;
-
-        public FlowController(ILogger<FlowController> logger, OnosService onosService)
+        private readonly Context _context;
+        public FlowController(ILogger<FlowController> logger, OnosService onosService, Context context)
         {
             _logger = logger;
             _onosService = onosService;
+            _context = context;
         }
 
-        /// <summary>
-        /// Display list of flows.
-        /// </summary>
-        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
             try
@@ -78,46 +75,19 @@ namespace OnosFlow.Controllers
                     return Content(errorString);
                 }
             }
-            return View();
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Create(string deviceId, FlowModel flow)
-        //{
-        //    try
-        //    {
-        //        var createFlow = _onosService.CreateFlow(flow.flows)
-        //        var createFlow = await _onosService.CreateFlow(deviceId);
-        //                    return View(createFlow);
-        //    }
-        //    catch (HttpRequestException e)
-        //    {
-        //        if (e.Message == "Response status code does not indicate success: 401 (Unauthorized).")
-        //        {
-        //            return RedirectToAction("UnauthorizedRequest");
-        //        }
-        //        else
-        //        {
-        //            string error = e.Message;
-        //            string errorString = $"There was an error getting flows: { error }";
-        //            return Content(errorString);
-        //        }
-        //    }
-        //}
-
-        public async Task<IActionResult> Edit(string deviceId)
+        [HttpPost]
+        public async Task<IActionResult> Create(string deviceId, Flow flow)
         {
-
-            return View();
-        }
-
-        public async Task<IActionResult> Delete(string deviceId, string flowId)
-        {
+            if (!ModelState.IsValid)
+            {
+                return View(flow);
+            }
             try
             {
-                ViewData["flowId"] = flowId;
-                var deleteFlow = await _onosService.DeleteFlow(deviceId, flowId);
-                return View(deleteFlow);
+                var createFlow = await _onosService.CreateFlow(deviceId, flow);
+                return RedirectToAction("Index");
             }
             catch (HttpRequestException e)
             {
@@ -134,11 +104,46 @@ namespace OnosFlow.Controllers
             }
         }
 
-        public IActionResult Privacy()
+        [HttpGet]
+        public async Task<IActionResult> Create()
         {
             return View();
         }
 
+        public async Task<IActionResult> Edit(string deviceId)
+        {
+
+            return View();
+        }
+
+        public async Task<IActionResult> Delete(string deviceId, string flowId)
+        {
+            try
+            {
+                ViewData["flowId"] = flowId;
+                var deleteFlow = await _onosService.DeleteFlow(deviceId, flowId);
+                return RedirectToAction("Index");
+            }
+            catch (HttpRequestException e)
+            {
+                if (e.Message == "Response status code does not indicate success: 401 (Unauthorized).")
+                {
+                    return RedirectToAction("UnauthorizedRequest");
+                }
+                else
+                {
+                    string error = e.Message;
+                    string errorString = $"There was an error getting flows: { error }";
+                    return Content(errorString);
+                }
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Delete()
+        {
+            return View();
+        }
         public IActionResult UnauthorizedRequest()
         {
             return View();

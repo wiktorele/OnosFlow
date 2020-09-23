@@ -63,21 +63,17 @@ namespace OnosFlow.Models
             return responseBody;
         }
 
-        //public async Task<FlowModel> CreateFlow(string deviceId)
-        //{
-        //    var postFlow = new FlowModel
-        //    {
-        //        flows = {}
-        //    };
-        //    var request.Content = new StringContent(JsonSerializer.Serialize(new FlowModel() { flows = { } }));
-        //    var response = await Client.PostAsJsonAsync($"v1/flows/{deviceId}", postFlow);
+        public async Task<HttpResponseMessage> CreateFlow(string deviceId, Flow postFlow)
+        { 
 
-        //    response.EnsureSuccessStatusCode();
-            
-        //    var postResponse = await response.Content.ReadFromJsonAsync<FlowModel>();
+            var response = await Client.PostAsJsonAsync($"v1/flows/{deviceId}", postFlow);
 
-        //    return postResponse;
-        //}
+            response.EnsureSuccessStatusCode();
+
+            //var postResponse = await response.Content.ReadFromJsonAsync<Flow>();
+
+            return response; //postResponse;
+        }
 
         //public async Task<HttpResponseMessage> UpdateFlow(string deviceId, string flowId)
         //{
