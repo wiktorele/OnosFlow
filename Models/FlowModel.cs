@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnosFlow.Models
 {
@@ -10,13 +11,16 @@ namespace OnosFlow.Models
     }
     public class Flow
     {
+        [Required]
         public string id { get; set; }
         public string tableId { get; set; }
         public string appId { get; set; }
         public int priority { get; set; }
         public int timeout { get; set; }
         public bool isPermanent { get; set; }
+        [Required]
         public string deviceId { get; set; }
+        [Required]
         public string state { get; set; }
         public int life { get; set; }
         public int bytes { get; set; }

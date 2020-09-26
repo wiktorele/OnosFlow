@@ -9,8 +9,8 @@
 <h4>Flow</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+    <form asp-action="Create">
+            <h2 class="mb-4">General</h2>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="id" class="control-label"></label>
@@ -72,11 +72,44 @@
                 <input asp-for="lastSeen" class="form-control" />
                 <span asp-validation-for="lastSeen" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        <h2 class="mb-4">Instructions</h2>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="treatment.instructions[0].type" class="control-label"></label>
+            <input asp-for="treatment.instructions[0].type" class="form-control" />
+            <span asp-validation-for="treatment.instructions[0].type" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="treatment.instructions[0].port" class="control-label"></label>
+            <input asp-for="treatment.instructions[0].port" class="form-control" />
+            <span asp-validation-for="treatment.instructions[0].port" class="text-danger"></span>
+        </div>
+        <h2 class="mb-4">Criteria</h2>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="selector.criteria[0].ethType" class="control-label"></label>
+            <input asp-for="selector.criteria[0].ethType" class="form-control" />
+            <span asp-validation-for="selector.criteria[0].ethType" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="selector.criteria[0].type" class="control-label"></label>
+            <input asp-for="selector.criteria[0].type" class="form-control" />
+            <span asp-validation-for="selector.criteria[0].type" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="selector.criteria[0].mac" class="control-label"></label>
+            <input asp-for="selector.criteria[0].mac" class="form-control" />
+            <span asp-validation-for="selector.criteria[0].mac" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="selector.criteria[0].port" class="control-label"></label>
+            <input asp-for="selector.criteria[0].port" class="form-control" />
+            <span asp-validation-for="selector.criteria[0].port" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
 </div>
 
 <div>

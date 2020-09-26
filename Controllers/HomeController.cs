@@ -41,10 +41,6 @@ namespace OnosFlow.Controllers
         [HttpPost]
         public IActionResult CreateConfig(Config config)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(config);
-            }
 
             if(!_context.Configs.Any())
             {

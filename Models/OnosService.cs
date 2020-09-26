@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore.Internal;
 using OnosFlow.Data;
 using System;
 using System.Collections.Generic;
@@ -21,14 +22,18 @@ namespace OnosFlow.Models
         {
             _context = context;
 
-            client.BaseAddress = new Uri(url);
             client.DefaultRequestHeaders.Clear();
 
             //get config from InMemoryDataBase
             var dbConfig = _context.Configs.First();
             string clientId = dbConfig.UserName;
             string clientPassword = dbConfig.Password;
-             //set config as authentication credentials
+            string IpAddress = dbConfig.IpAddress;
+
+            url = "http://" + IpAddress +":8181/onos/";
+
+            client.BaseAddress = new Uri(url);
+            //set config as authentication credentials
             var authenticationString = $"{clientId}:{clientPassword}";
             //convert credentials to base64
             var base64EncodedAuthenticationString = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(authenticationString));
@@ -63,7 +68,7 @@ namespace OnosFlow.Models
             return responseBody;
         }
 
-        public async Task<HttpResponseMessage> CreateFlow(string deviceId, Flow postFlow)
+        public async Task<HttpResponseMessage> PostFlow(string deviceId, Flow postFlow)
         { 
 
             var response = await Client.PostAsJsonAsync($"v1/flows/{deviceId}", postFlow);
@@ -72,17 +77,8 @@ namespace OnosFlow.Models
 
             //var postResponse = await response.Content.ReadFromJsonAsync<Flow>();
 
-            return response; //postResponse;
+            return response;
         }
-
-        //public async Task<HttpResponseMessage> UpdateFlow(string deviceId, string flowId)
-        //{
-        //    var response = await Client.PutAsync($"v1/flows/{deviceId}/{flowId}"); ??????
-
-        //    response.EnsureSuccessStatusCode();
-
-        //    return response;
-        //}
 
         public async Task<HttpResponseMessage> DeleteFlow(string deviceId, string flowId)
         {

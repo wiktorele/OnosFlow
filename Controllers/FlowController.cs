@@ -24,12 +24,10 @@ namespace OnosFlow.Controllers
         private readonly OnosService _onosService;
         public IEnumerable<FlowModel> flowModel { get; set; }
         private readonly ILogger<FlowController> _logger;
-        private readonly Context _context;
-        public FlowController(ILogger<FlowController> logger, OnosService onosService, Context context)
+        public FlowController(ILogger<FlowController> logger, OnosService onosService)
         {
             _logger = logger;
             _onosService = onosService;
-            _context = context;
         }
 
         public async Task<IActionResult> Index()
@@ -86,7 +84,7 @@ namespace OnosFlow.Controllers
             }
             try
             {
-                var createFlow = await _onosService.CreateFlow(deviceId, flow);
+                var createFlow = await _onosService.PostFlow(deviceId, flow);
                 return RedirectToAction("Index");
             }
             catch (HttpRequestException e)
@@ -105,22 +103,51 @@ namespace OnosFlow.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View();
         }
 
-        public async Task<IActionResult> Edit(string deviceId)
+        [HttpPost]
+        public async Task<IActionResult> EditConfirmed(string deviceId, Flow flow)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(flow);
+            }
+            try
+            {
+                var createFlow = await _onosService.PostFlow(deviceId, flow);
+                return RedirectToAction("Index");
+            }
+            catch (HttpRequestException e)
+            {
+                if (e.Message == "Response status code does not indicate success: 401 (Unauthorized).")
+                {
+                    return RedirectToAction("UnauthorizedRequest");
+                }
+                else
+                {
+                    string error = e.Message;
+                    string errorString = $"There was an error getting flows: { error }";
+                    return Content(errorString);
+                }
+            }
+        }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(string deviceId, string flowId)
+        {
+            ViewData["flowId"] = flowId;
+            ViewData["deviceId"] = deviceId;
             return View();
         }
 
-        public async Task<IActionResult> Delete(string deviceId, string flowId)
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmed(string deviceId, string flowId)
         {
             try
             {
-                ViewData["flowId"] = flowId;
                 var deleteFlow = await _onosService.DeleteFlow(deviceId, flowId);
                 return RedirectToAction("Index");
             }
@@ -133,15 +160,18 @@ namespace OnosFlow.Controllers
                 else
                 {
                     string error = e.Message;
-                    string errorString = $"There was an error getting flows: { error }";
+                    string errorString = $"There was an error deleting flow: { error }";
                     return Content(errorString);
                 }
             }
         }
 
         [HttpGet]
-        public IActionResult Delete()
+        public IActionResult Delete(string deviceId, string flowId)
         {
+            ViewData["flowId"] = flowId;
+            ViewData["deviceId"] = deviceId;
+
             return View();
         }
         public IActionResult UnauthorizedRequest()
