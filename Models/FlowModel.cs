@@ -11,7 +11,8 @@ namespace OnosFlow.Models
     }
     public class Flow
     {
-        [Required]
+        //[Required]
+        [RegularExpression("^[0-9]+")]
         public string id { get; set; }
         public string tableId { get; set; }
         public string appId { get; set; }
@@ -23,6 +24,7 @@ namespace OnosFlow.Models
         [Required]
         public string state { get; set; }
         public int life { get; set; }
+        public int packets { get; set; }
         public int bytes { get; set; }
         public string liveType { get; set; }
         public long lastSeen { get; set; }
@@ -55,4 +57,15 @@ namespace OnosFlow.Models
         public string mac { get; set; }
         public string ethType { get; set; }
     }
+
+    //public enum InstructionTypes
+    //{
+    //    OUTPUT,
+    //    TABLE,
+    //    GROUP,
+    //    METER,
+    //    QUEUE
+    //}
+
+
 }
