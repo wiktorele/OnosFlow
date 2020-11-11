@@ -4,11 +4,11 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Flow Details</h1>
+<h1>Szczegóły</h1>
 <hr />
 <div class="row">
     <div class="col-sm-4">
-        <h2 class="mb-4">General</h2>
+        <h2 class="mb-4">Ogólne</h2>
         <dl class="row">
             <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.id)
@@ -108,12 +108,12 @@
         <hr />
     </div>
     <div class="col-sm-4">
-        <h2 class="mb-4">Instructions</h2>
+        <h2 class="mb-4">Instrukcje</h2>
         @foreach (var item in Model.treatment.instructions)
         {
             <dl class="row">
                 <dt class="col-sm-4">
-                    Type
+                    @Html.DisplayNameFor(model => model.treatment.instructions[0].type)
                 </dt>
                 <dd class="col-sm-6">
                     @item.type
@@ -121,7 +121,7 @@
             </dl>
             <dl class="row">
                 <dt class="col-sm-4">
-                    Port
+                    @Html.DisplayNameFor(model => model.treatment.instructions[0].port)
                 </dt>
                 <dd class="col-sm-6">
                     @item.port
@@ -131,39 +131,23 @@
         <hr />
     </div>
     <div class="col-sm-4">
-        <h2 class="mb-4">Criteria</h2>
+        <h2 class="mb-4">Kryteria</h2>
         @foreach (var item in Model.selector.criteria)
         {
-            <dl class="row">
+            @*<dl class="row">
                 <dt class="col-sm-4">
                     EthType
                 </dt>
                 <dd class="col-sm-6">
                     @item.ethType
                 </dd>
-            </dl>
+            </dl>*@
             <dl class="row">
                 <dt class="col-sm-4">
-                    Type
+                    @Html.DisplayNameFor(model => model.selector.criteria[0].type)
                 </dt>
                 <dd class="col-sm-6">
                     @item.type
-                </dd>
-            </dl>
-            <dl class="row">
-                <dt class="col-sm-4">
-                    Mac
-                </dt>
-                <dd class="col-sm-6">
-                    @item.mac
-                </dd>
-            </dl>
-            <dl class="row">
-                <dt class="col-sm-4">
-                    Port
-                </dt>
-                <dd class="col-sm-6">
-                    @item.port
                 </dd>
             </dl>
         }
@@ -171,6 +155,6 @@
     </div>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+   @* @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
+    <a asp-action="Index">Wróć do tabeli</a>
 </div>

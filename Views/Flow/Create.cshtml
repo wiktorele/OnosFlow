@@ -4,19 +4,17 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Flow</h4>
+<h1>Stwórz przepływ</h1>
 <hr />
 <div class="row">
     <form asp-action="Create">
-        <h2 class="mb-4">General</h2>
+        <h2 class="mb-4">Ogólne</h2>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
+        @*<div class="form-group">
             <label asp-for="id" class="control-label"></label>
             <input asp-for="id" class="form-control" />
             <span asp-validation-for="id" class="text-danger"></span>
-        </div>
+        </div>*@
         <div class="form-group">
             <label asp-for="tableId" class="control-label"></label>
             <input asp-for="tableId" class="form-control" />
@@ -47,16 +45,16 @@
             <input asp-for="deviceId" class="form-control" />
             <span asp-validation-for="deviceId" class="text-danger"></span>
         </div>
-        <div class="form-group">
+        <!--<div class="form-group">
             <label asp-for="state" class="control-label"></label>
             <select asp-for="state" class="form-control">
-                <option>ADDED</option>
+                <option>ADDED</option>-->
                 @*<option></option>
                 <option></option>
                 <option></option>*@
-            </select>
+            <!--</select>
             <span asp-validation-for="state" class="text-danger"></span>
-        </div>
+        </div>-->
         <div class="form-group">
             <label asp-for="life" class="control-label"></label>
             <input asp-for="life" class="form-control" />
@@ -72,18 +70,18 @@
             <input asp-for="liveType" class="form-control" />
             <span asp-validation-for="liveType" class="text-danger"></span>
         </div>
-        <div class="form-group">
+        @*<div class="form-group">
             <label asp-for="lastSeen" class="control-label"></label>
             <input asp-for="lastSeen" class="form-control" />
             <span asp-validation-for="lastSeen" class="text-danger"></span>
-        </div>
-        <h2 class="mb-4">Instructions</h2>
+        </div>*@
+        <h2 class="mb-4">Instrukcje</h2>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="treatment.instructions[0].type" class="control-label"></label>
             <select asp-for="treatment.instructions[0].type" class="form-control">
                 <option>OUTPUT</option>
-                <option>TABLE</option>
+                @*<option>TABLE</option>
                 <option>GROUP</option>
                 <option>METER</option>
                 <option>QUEUE</option>
@@ -91,7 +89,7 @@
                 <option>L1MODIFICATION</option>
                 <option>L2MODIFICATION</option>
                 <option>L3MODIFICATION</option>
-                <option>L4MODIFICATION</option>
+                <option>L4MODIFICATION</option>*@
             </select>
             <span asp-validation-for="treatment.instructions[0].type" class="text-danger"></span>
         </div>
@@ -100,7 +98,7 @@
             <input asp-for="treatment.instructions[0].port" class="form-control" />
             <span asp-validation-for="treatment.instructions[0].port" class="text-danger"></span>
         </div>
-        <h2 class="mb-4">Criteria</h2>
+        <h2 class="mb-4">Kryteria</h2>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="selector.criteria[0].type" class="control-label"></label>
@@ -142,11 +140,11 @@
             </select>
             <span asp-validation-for="selector.criteria[0].type" class="text-danger"></span>
         </div>
-        <div class="form-group">
+        @*<div class="form-group">
             <label asp-for="selector.criteria[0].ethType" class="control-label"></label>
             <input asp-for="selector.criteria[0].ethType" class="form-control" />
             <span asp-validation-for="selector.criteria[0].ethType" class="text-danger"></span>
-        </div>
+        </div>*@
         @*<div class="form-group">
             <label asp-for="selector.criteria[0].mac" class="control-label"></label>
             <input asp-for="selector.criteria[0].mac" class="form-control" />
@@ -164,7 +162,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Wróć do tabeli</a>
 </div>
 
 @section Scripts {

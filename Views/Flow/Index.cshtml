@@ -1,22 +1,21 @@
 ﻿@model OnosFlow.Models.FlowModel
-
 @{
     ViewData["Title"] = "Flows";
 } 
 
-<h1>Flow table</h1>
+<h1>Tablica przepływów</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Stwórz nowy</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Priority</th>
-            <th>Timeout</th>
-            <th>DeviceId</th>
-            <th>State</th>
+            <th>@Html.DisplayNameFor(model => model.flows[0].id)</th>
+            <th>@Html.DisplayNameFor(model => model.flows[0].priority)</th>
+            <th>@Html.DisplayNameFor(model => model.flows[0].timeout)</th>
+            <th>@Html.DisplayNameFor(model => model.flows[0].deviceId)</th>
+            <th>@Html.DisplayNameFor(model => model.flows[0].state)</th>
         </tr>
     </thead>
     <tbody>
@@ -39,8 +38,8 @@
             </td>
             <td>
                 @*@Html.ActionLink("Edit", "Edit", new { deviceId=item.deviceId}) |*@
-                @Html.ActionLink("Details", "Details", new { deviceId=item.deviceId, flowId=item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { deviceId=item.deviceId, flowId=item.id })
+                @Html.ActionLink("Szczegóły", "Details", new { deviceId=item.deviceId, flowId=item.id }) |
+                @Html.ActionLink("Usuń", "Delete", new { deviceId=item.deviceId, flowId=item.id })
             </td>
         </tr>
 }
