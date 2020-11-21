@@ -16,6 +16,7 @@ namespace OnosFlow.Models
         [RegularExpression("^[0-9]+")]
         [Display(Name = "Id przepływu")]
         public string id { get; set; }
+        [Display(Name = "Id tablicy")]
         public string tableId { get; set; }
         public string appId { get; set; }
         [Display(Name = "Priorytet")]
@@ -63,27 +64,32 @@ namespace OnosFlow.Models
 
     public class Criterion
     {
-        public ICollection<CriterionType> Types { get; set; }
         public string type { get; set; }
 
+        public string ethType { get; set; }
 
-        public Criterion()
-        {
-            Types = new List<CriterionType>()
-            {
-                new CriterionType() {Type = "ETH_TYPE"},
-                new CriterionType() {Type = "ETH_DST"},
-                new CriterionType() {Type = "ETH_SRC"},
-                new CriterionType() {Type = "IN_PORT"}
-            };
-        }
     }
 
-    public class CriterionType
-    {
-        [Required]
-        public string Type { get; set; }
-    }
+    //public class Criterion1
+    //{
+    //    public string type { get; set; }
+
+    //    public string eth_dst { get; set; }
+
+    //}
+    //public class Criterion2
+    //{
+    //    public string type { get; set; }
+
+    //    public string eth_src { get; set; }
+
+    //}
+
+    //public class CriterionType
+    //{
+    //    [Required]
+    //    public string Type { get; set; }
+    //}
 
 
 }

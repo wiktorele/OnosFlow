@@ -25,14 +25,14 @@
                 @Html.DisplayFor(model => model.tableId)
             </dd>
         </dl>
-        <dl class="row">
+        @*<dl class="row">
             <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.appId)
             </dt>
             <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.appId)
             </dd>
-        </dl>
+        </dl>*@
         <dl class="row">
             <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.priority)
@@ -73,14 +73,14 @@
                 @Html.DisplayFor(model => model.state)
             </dd>
         </dl>
-        <dl class="row">
+        @*<dl class="row">
             <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.life)
             </dt>
             <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.life)
             </dd>
-        </dl>
+        </dl>*@
         <dl class="row">
             <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.bytes)
@@ -89,14 +89,14 @@
                 @Html.DisplayFor(model => model.bytes)
             </dd>
         </dl>
-        <dl class="row">
+        @*<dl class="row">
             <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.liveType)
             </dt>
             <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.liveType)
             </dd>
-        </dl>
+        </dl>*@
         <dl class="row">
             <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.lastSeen)
@@ -134,20 +134,20 @@
         <h2 class="mb-4">Kryteria</h2>
         @foreach (var item in Model.selector.criteria)
         {
-            @*<dl class="row">
-                <dt class="col-sm-4">
-                    EthType
-                </dt>
-                <dd class="col-sm-6">
-                    @item.ethType
-                </dd>
-            </dl>*@
             <dl class="row">
                 <dt class="col-sm-4">
                     @Html.DisplayNameFor(model => model.selector.criteria[0].type)
                 </dt>
                 <dd class="col-sm-6">
                     @item.type
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.selector.criteria[0].ethType)
+                </dt>
+                <dd class="col-sm-6">
+                    @item.ethType
                 </dd>
             </dl>
         }
