@@ -84,6 +84,7 @@ namespace OnosFlow.Controllers
             }
             try
             {
+
                 var createFlow = await _onosService.PostFlow(deviceId, flow);
                 return RedirectToAction("Index");
             }
@@ -105,7 +106,19 @@ namespace OnosFlow.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            //Criterion criteria = new Criterion();
+            //if (criteria.type == "ETH_TYPE")
+            //{
+
+            //}
+            Flow flow = new Flow();
+            return View(flow);
+        }
+
+        public IActionResult CriterionFormPartial(int id)
+        {
+            ViewBag.id = id;
+            return PartialView("_CriterionForm");
         }
 
         [HttpPost]

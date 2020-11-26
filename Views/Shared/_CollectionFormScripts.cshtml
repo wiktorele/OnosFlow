@@ -1,0 +1,74 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        $("#addCriterion").click(function () {
+            let lastCriterion = $("#criteria").find('.criterion:last');
+            let id = 0;
+            if (lastCriterion.length) {
+                id = lastCriterion.data('id')+1;
+            }
+            $.get("/Flow/CriterionFormPartial?id="+id, function (data) {
+                let content = data;
+                $("#criteria").append(content);
+                $("#criteria").find('.delete-criterion').last().click(function () {
+                    $(this).closest('.criterion').remove();
+                });
+                $("#criteria").find('#selector_criteria_' + id + '__type').change(function () {
+                    let value = $(this).val();
+                    switch (value) {
+                        case 'ETH_TYPE':
+                            $(this).siblings('.criterion-value').each(function () {
+                                $(this).addClass('d-none');
+                                $(this).find(':input').prop("disabled", true);
+                            });
+                            $(this).siblings('.value-eth-type').removeClass('d-none');
+                            console.log($(this).find(':input'));
+                            $(this).siblings('.value-eth-type').find(':input').prop("disabled", false);
+                            break;
+                        case 'ETH_DST':
+                            $(this).siblings('.criterion-value').each(function () {
+                                $(this).addClass('d-none');
+                                $(this).find(':input').prop("disabled", true);
+                            });
+                            $(this).siblings('.value-mac').removeClass('d-none');
+                            console.log($(this).find(':input'));
+                            $(this).siblings('.value-mac').find(':input').prop("disabled", false);
+                            break;
+                        case 'ETH_SRC':
+                            $(this).siblings('.criterion-value').each(function () {
+                                $(this).addClass('d-none');
+                                $(this).find(':input').prop("disabled", true);
+                            });
+                            $(this).siblings('.value-mac').removeClass('d-none');
+                            console.log($(this).find(':input'));
+                            $(this).siblings('.value-mac').find(':input').prop("disabled", false);
+                            break;
+                        case 'IN_PORT':
+                            $(this).siblings('.criterion-value').each(function () {
+                                $(this).addClass('d-none');
+                                $(this).find(':input').prop("disabled", true);
+                            });
+                            $(this).siblings('.value-port').removeClass('d-none');
+                            console.log($(this).find(':input'));
+                            $(this).siblings('.value-port').find(':input').prop("disabled", false);
+                            break;
+                        default:
+                            console.log('Nieznany typ.');
+                            break;
+                    }
+
+                });
+                $("#criteria").find('#selector_criteria_' + id + '__type').trigger('change');
+            });
+        });
+    });
+
+    function hideAndShow(attr) {
+        $(this).siblings('.criterion-value').each(function () {
+            $(this).addClass('d-none');
+            $(this).find(':input').prop("disabled", true);
+        });
+        $(this).siblings(attr).removeClass('d-none');
+        console.log($(this).find(':input'));
+        $(this).siblings(attr).find(':input').prop("disabled", false);
+    }
+</script>

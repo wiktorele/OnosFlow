@@ -7,7 +7,7 @@
 <h1>Szczegóły</h1>
 <hr />
 <div class="row">
-    <div class="col-sm-4">
+    <div class="col-md-4">
         <h2 class="mb-4">Ogólne</h2>
         <dl class="row">
             <dt class="col-sm-4">
@@ -107,7 +107,7 @@
         </dl>
         <hr />
     </div>
-    <div class="col-sm-4">
+    <div class="col-md-4">
         <h2 class="mb-4">Instrukcje</h2>
         @foreach (var item in Model.treatment.instructions)
         {
@@ -130,13 +130,13 @@
         }
         <hr />
     </div>
-    <div class="col-sm-4">
+    <div class="col-md-4">
         <h2 class="mb-4">Kryteria</h2>
         @foreach (var item in Model.selector.criteria)
         {
             <dl class="row">
                 <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.selector.criteria[0].type)
+                    Typ
                 </dt>
                 <dd class="col-sm-6">
                     @item.type
@@ -144,12 +144,29 @@
             </dl>
             <dl class="row">
                 <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.selector.criteria[0].ethType)
+                    Typ ETH
                 </dt>
                 <dd class="col-sm-6">
                     @item.ethType
                 </dd>
             </dl>
+            <dl class="row">
+                <dt class="col-sm-4">
+                    Adres Mac
+                </dt>
+                <dd class="col-sm-6">
+                    @item.mac
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-4">
+                    Port
+                </dt>
+                <dd class="col-sm-6">
+                    @if (item.port == 0) { } else { @Html.DisplayFor(m => item.port); }
+                   </dd>
+            </dl>
+        <p>******************************</p>
         }
         <hr />
     </div>

@@ -25,10 +25,14 @@ namespace OnosFlow.Models
             client.DefaultRequestHeaders.Clear();
 
             //get config from InMemoryDataBase
-            var dbConfig = _context.Configs.First();
-            string clientId = dbConfig.UserName;
-            string clientPassword = dbConfig.Password;
-            string IpAddress = dbConfig.IpAddress;
+            //var dbConfig = _context.Configs.First();
+            //string clientId = dbConfig.UserName;
+            //string clientPassword = dbConfig.Password;
+            //string IpAddress = dbConfig.IpAddress;
+
+            string clientId = "onos";
+            string clientPassword = "rocks";
+            string IpAddress = "192.168.56.120";
 
             url = "http://" + IpAddress +":8181/onos/";
 
@@ -69,10 +73,8 @@ namespace OnosFlow.Models
         }
 
         public async Task<HttpResponseMessage> PostFlow(string deviceId, Flow postFlow)
-        { 
-
+        {
             var response = await Client.PostAsJsonAsync($"v1/flows/{deviceId}", postFlow);
-
             response.EnsureSuccessStatusCode();
 
             //var postResponse = await response.Content.ReadFromJsonAsync<Flow>();

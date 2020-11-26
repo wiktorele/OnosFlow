@@ -1,7 +1,9 @@
 ﻿
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace OnosFlow.Models
 {
@@ -28,7 +30,7 @@ namespace OnosFlow.Models
         [Required]
         [Display(Name = "Id urządzenia")]
         public string deviceId { get; set; }
-        [Required]
+
         [Display(Name = "Stan")]
         public string state { get; set; }
         public int life { get; set; }
@@ -59,15 +61,34 @@ namespace OnosFlow.Models
 
     public class Selector
     {
-        public Criterion[] criteria { get; set; }
+        public IList<Criterion> criteria { get; set; }
+
+        //public ICollection<Criterion> criteria { get; set; }
     }
 
     public class Criterion
     {
+        [Display(Name = "Typ kryterium")]
         public string type { get; set; }
-
+        [Display(Name = "Typ ETH")]
         public string ethType { get; set; }
+        [Display(Name = "Adres mac")]
+        public string mac { get; set; }
+        [Display(Name = "Port")]
+        public int port { get; set; }
+        [Display(Name = "Adres ip")]
+        public string ip { get; set; }
+        [Display(Name = "Protokół warstwy transportowej")]
+        public int protocol { get; set; }
+        [Display(Name = "Port tcp")]
+        public string tcpPort { get; set; }
+        [Display(Name = "Port udp")]
+        public string udpPort { get; set; }
 
+        public static IEnumerable<string> GetTypes()
+        {
+            return new[] { "ETH_TYPE", "ETH_DST", "ETH_SRC", "IPV4_SRC", "IPV4_DST", "IPV6_SRC", "IPV6_DST", "IN_PORT", "IP_PROTO" };
+        }
     }
 
     //public class Criterion1
