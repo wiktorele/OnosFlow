@@ -8,18 +8,38 @@
             <span asp-validation-for="@Model.selector.criteria[id].type" class="text-danger"></span>
             <div class="criterion-value value-eth-type d-none">
                 <label asp-for="selector.criteria[id].ethType" class="control-label"></label>
-                <input asp-for="selector.criteria[id].ethType" class="form-control" disabled="disabled"/>
+                <input asp-for="selector.criteria[id].ethType" class="form-control" disabled="disabled" />
                 <span asp-validation-for="@Model.selector.criteria[id].ethType" class="text-danger"></span>
             </div>
             <div class="criterion-value value-mac d-none">
                 <label asp-for="selector.criteria[id].mac" class="control-label"></label>
-                <input asp-for="selector.criteria[id].mac" class="form-control" disabled="disabled"/>
+                <input asp-for="selector.criteria[id].mac" class="form-control" disabled="disabled" />
                 <span asp-validation-for="@Model.selector.criteria[id].mac" class="text-danger"></span>
             </div>
             <div class="criterion-value value-port d-none">
                 <label asp-for="selector.criteria[id].port" class="control-label"></label>
-                <input asp-for="selector.criteria[id].port" class="form-control" disabled="disabled"/>
+                <input asp-for="selector.criteria[id].port" class="form-control" disabled="disabled" />
                 <span asp-validation-for="@Model.selector.criteria[id].port" class="text-danger"></span>
+            </div>
+            <div class="criterion-value value-ip d-none">
+                <label asp-for="selector.criteria[id].ip" class="control-label"></label>
+                <input asp-for="selector.criteria[id].ip" class="form-control" disabled="disabled" />
+                <span asp-validation-for="@Model.selector.criteria[id].ip" class="text-danger"></span>
+            </div>
+            <div class="criterion-value value-tcp-port d-none">
+                <label asp-for="selector.criteria[id].tcpPort" class="control-label"></label>
+                <input asp-for="selector.criteria[id].tcpPort" class="form-control" disabled="disabled" />
+                <span asp-validation-for="@Model.selector.criteria[id].tcpPort" class="text-danger"></span>
+            </div>
+            <div class="criterion-value value-udp-port d-none">
+                <label asp-for="selector.criteria[id].udpPort" class="control-label"></label>
+                <input asp-for="selector.criteria[id].udpPort" class="form-control" disabled="disabled" />
+                <span asp-validation-for="@Model.selector.criteria[id].udpPort" class="text-danger"></span>
+            </div>
+            <div class="criterion-value value-protocol d-none">
+                <label asp-for="selector.criteria[id].protocol" class="control-label"></label>
+                <input asp-for="selector.criteria[id].protocol" class="form-control" disabled="disabled" />
+                <span asp-validation-for="@Model.selector.criteria[id].protocol" class="text-danger"></span>
             </div>
             <button type="button" class="delete-criterion btn btn-danger mt-3">Usuń</button>
         </div>

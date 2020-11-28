@@ -16,40 +16,40 @@
                     let value = $(this).val();
                     switch (value) {
                         case 'ETH_TYPE':
-                            $(this).siblings('.criterion-value').each(function () {
-                                $(this).addClass('d-none');
-                                $(this).find(':input').prop("disabled", true);
-                            });
-                            $(this).siblings('.value-eth-type').removeClass('d-none');
-                            console.log($(this).find(':input'));
-                            $(this).siblings('.value-eth-type').find(':input').prop("disabled", false);
+                            hideAndShow.call(this, ".value-eth-type");
                             break;
                         case 'ETH_DST':
-                            $(this).siblings('.criterion-value').each(function () {
-                                $(this).addClass('d-none');
-                                $(this).find(':input').prop("disabled", true);
-                            });
-                            $(this).siblings('.value-mac').removeClass('d-none');
-                            console.log($(this).find(':input'));
-                            $(this).siblings('.value-mac').find(':input').prop("disabled", false);
+                            hideAndShow.call(this, ".value-mac");
                             break;
                         case 'ETH_SRC':
-                            $(this).siblings('.criterion-value').each(function () {
-                                $(this).addClass('d-none');
-                                $(this).find(':input').prop("disabled", true);
-                            });
-                            $(this).siblings('.value-mac').removeClass('d-none');
-                            console.log($(this).find(':input'));
-                            $(this).siblings('.value-mac').find(':input').prop("disabled", false);
+                            hideAndShow.call(this, ".value-mac");
                             break;
                         case 'IN_PORT':
-                            $(this).siblings('.criterion-value').each(function () {
-                                $(this).addClass('d-none');
-                                $(this).find(':input').prop("disabled", true);
-                            });
-                            $(this).siblings('.value-port').removeClass('d-none');
-                            console.log($(this).find(':input'));
-                            $(this).siblings('.value-port').find(':input').prop("disabled", false);
+                            hideAndShow.call(this, ".value-port");
+                            break;
+                        case 'IPV4_SRC':
+                            hideAndShow.call(this, ".value-ip");
+                            break;
+                        case 'IPV4_DST':
+                            hideAndShow.call(this, ".value-ip");
+                            break;
+                        case 'IN_PORT':
+                            hideAndShow.call(this, ".value-port");
+                            break;
+                        case 'IP_PROTOCOL':
+                            hideAndShow.call(this, ".value-protocol");
+                            break;
+                        case 'TCP_SRC':
+                            hideAndShow.call(this, ".value-tcp-port");
+                            break;
+                        case 'TCP_DST':
+                            hideAndShow.call(this, ".value-tcp-port");
+                            break;
+                        case 'UDP_SRC':
+                            hideAndShow.call(this, ".value-udp-port");
+                            break;
+                        case 'UDP_DST':
+                            hideAndShow.call(this, ".value-udp-port");
                             break;
                         default:
                             console.log('Nieznany typ.');
