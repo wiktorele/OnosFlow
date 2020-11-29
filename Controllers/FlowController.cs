@@ -106,11 +106,6 @@ namespace OnosFlow.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            //Criterion criteria = new Criterion();
-            //if (criteria.type == "ETH_TYPE")
-            //{
-
-            //}
             Flow flow = new Flow();
             return View(flow);
         }
@@ -119,6 +114,12 @@ namespace OnosFlow.Controllers
         {
             ViewBag.id = id;
             return PartialView("_CriterionForm");
+        }
+
+        public IActionResult InstructionFormPartial(int id)
+        {
+            ViewBag.id = id;
+            return PartialView("_InstructionForm");
         }
 
         //[HttpPost]
@@ -156,28 +157,28 @@ namespace OnosFlow.Controllers
         //    return View();
         //}
 
-        //[HttpPost]
-        //public async Task<IActionResult> DeleteConfirmed(string deviceId, string flowId)
-        //{
-        //    try
-        //    {
-        //        var deleteFlow = await _onosService.DeleteFlow(deviceId, flowId);
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch (HttpRequestException e)
-        //    {
-        //        if (e.Message == "Response status code does not indicate success: 401 (Unauthorized).")
-        //        {
-        //            return RedirectToAction("UnauthorizedRequest");
-        //        }
-        //        else
-        //        {
-        //            string error = e.Message;
-        //            string errorString = $"There was an error deleting flow: { error }";
-        //            return Content(errorString);
-        //        }
-        //    }
-        //}
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmed(string deviceId, string flowId)
+        {
+            try
+            {
+                var deleteFlow = await _onosService.DeleteFlow(deviceId, flowId);
+                return RedirectToAction("Index");
+            }
+            catch (HttpRequestException e)
+            {
+                if (e.Message == "Response status code does not indicate success: 401 (Unauthorized).")
+                {
+                    return RedirectToAction("UnauthorizedRequest");
+                }
+                else
+                {
+                    string error = e.Message;
+                    string errorString = $"There was an error deleting flow: { error }";
+                    return Content(errorString);
+                }
+            }
+        }
 
         [HttpGet]
         public IActionResult Delete(string deviceId, string flowId)

@@ -183,7 +183,10 @@
                     @Html.DisplayNameFor(model => item.protocol)
                 </dt>
                 <dd class="col-sm-6">
-                    @item.protocol
+                    @if (item.protocol == 0) { }
+                    else
+                    {@Html.DisplayFor(m => item.protocol);
+                }
                 </dd>
             </dl>
             <dl class="row">

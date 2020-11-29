@@ -71,6 +71,18 @@ namespace OnosFlow.Models
         public string tcpPort { get; set; }
         [Display(Name = "Port udp")]
         public string udpPort { get; set; }
+        public int vladId { get; set; }
+        public int vladPcp { get; set; }
+
+        public static IEnumerable<string> GetTypes()
+        {
+            return new[] { "OUTPUT", "L2MODIFICATION", "L3MODIFICATION", "L4MODIFICATION" };
+        }
+
+        public static IEnumerable<string> GetSybTypes()
+        {
+            return new[] { "ETH_TYPE", "ETH_DST", "ETH_SRC", "IPV4_SRC", "IPV4_DST", "IPV6_SRC", "IPV6_DST", "IN_PORT", "IP_PROTO", "TCP_SRC", "TCP_DST", "UDP_SRC", "UDP_DST", "VLAN_VID", "VLAN_PCP" };
+        }
 
     }
 
@@ -91,7 +103,7 @@ namespace OnosFlow.Models
         public int port { get; set; }
         [Display(Name = "Adres ip")]
         public string ip { get; set; }
-        [Display(Name = "Protokol warstwy transportowej")]
+        [Display(Name = "Protokół warstwy transportowej")]
         public int protocol { get; set; }
         [Display(Name = "Port tcp")]
         public string tcpPort { get; set; }

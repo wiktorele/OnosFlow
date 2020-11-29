@@ -66,10 +66,56 @@
                 $("#criteria").find('#selector_criteria_' + id + '__type').trigger('change');
             });
         });
+        $("#addInstruction").click(function () {
+            let lastInstruction = $("#instructions").find('.instruction:last');
+            let id = 0;
+            if (lastInstruction.length) {
+                id = lastInstruction.data('id')+1;
+            }
+            $.get("/Flow/InstructionFormPartial?id="+id, function (data) {
+                let content = data;
+                $("#instructions").append(content);
+                $("#instructions").find('.delete-instruction').last().click(function () {
+                    $(this).closest('.instruction').remove();
+                });
+                $("#instructions").find('#treatment_instructions_' + id + '__type').change(function () {
+                    let value = $(this).val();
+                    switch (value) {
+                        case 'OUTPUT':
+                            hideAndShowInstr.call(this, ".value-port");
+                            break;
+                        case 'L2MODIFICATION':
+                            hideAndShowInstr.call(this, ".value-subtype");
+                            break;
+                        case 'L3MODIFICATION':
+                            hideAndShowInstr.call(this, ".value-subtype");
+                            break;
+                        case 'L4MODIFICATION':
+                            hideAndShowInstr.call(this, ".value-subtype");
+                            break;
+                        default:
+                            console.log('Nieznany typ.');
+                            break;
+                    }
+
+                });
+                $("#instructions").find('#treatment_instructions_' + id + '__type').trigger('change');
+            });
+        });
     });
 
     function hideAndShow(attr) {
         $(this).siblings('.criterion-value').each(function () {
+            $(this).addClass('d-none');
+            $(this).find(':input').prop("disabled", true);
+        });
+        $(this).siblings(attr).removeClass('d-none');
+        console.log($(this).find(':input'));
+        $(this).siblings(attr).find(':input').prop("disabled", false);
+    }
+
+    function hideAndShowInstr(attr) {
+        $(this).siblings('.instruction-value').each(function () {
             $(this).addClass('d-none');
             $(this).find(':input').prop("disabled", true);
         });

@@ -1,0 +1,27 @@
+﻿@model OnosFlow.Models.Flow
+@{int id = ViewBag.id;}
+<div class="instruction card bg-light mb-3" data-id="@id">
+    <div class="card-body">
+        <div class="form-group">
+            <label asp-for="treatment.instructions[id].type" class="control-label"></label>
+            <select asp-for="treatment.instructions[id].type" asp-items="@(new SelectList(Instruction.GetTypes()))" class="form-control"></select>
+            <span asp-validation-for="@Model.treatment.instructions[id].type" class="text-danger"></span>
+            <div class="instruction-value value-port d-none">
+                <label asp-for="treatment.instructions[id].port" class="control-label"></label>
+                <input asp-for="treatment.instructions[id].port" class="form-control" disabled="disabled" />
+                <span asp-validation-for="@Model.treatment.instructions[id].port" class="text-danger"></span>
+            </div>
+            <div class="instruction-value value-subtype d-none">
+                <label asp-for="treatment.instructions[id].subtype" class="control-label"></label>
+                <input asp-for="treatment.instructions[id].subtype" class="form-control" disabled="disabled" />
+                <span asp-validation-for="@Model.treatment.instructions[id].subtype" class="text-danger"></span>
+            </div>
+            <div class="instruction-value value-mac d-none">
+                <label asp-for="treatment.instructions[id].mac" class="control-label"></label>
+                <input asp-for="treatment.instructions[id].mac" class="form-control" disabled="disabled" />
+                <span asp-validation-for="@Model.treatment.instructions[id].mac" class="text-danger"></span>
+            </div>
+            <button type="button" class="delete-instruction btn btn-danger mt-3">Usuń</button>
+        </div>
+    </div>
+</div>
