@@ -55,10 +55,13 @@ namespace OnosFlow.Models
     {
         [Display(Name = "Typ instrukcji")]
         public string type { get; set; }
+        [Display(Name = "Podtyp instrukcji")]
         public string subtype { get; set; }
         [Display(Name = "Port")]
         public string port { get; set; }
+        [Display(Name = "Id tabeli")]
         public string tableId { get; set; }
+        [Display(Name = "Id grupy")]
         public string groupId { get; set; }
         [Display(Name = "Adres mac")]
         public string mac { get; set; }
@@ -88,7 +91,7 @@ namespace OnosFlow.Models
         public int port { get; set; }
         [Display(Name = "Adres ip")]
         public string ip { get; set; }
-        [Display(Name = "Protokół warstwy transportowej")]
+        [Display(Name = "Protokol warstwy transportowej")]
         public int protocol { get; set; }
         [Display(Name = "Port tcp")]
         public string tcpPort { get; set; }

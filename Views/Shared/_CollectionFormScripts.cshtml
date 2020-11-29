@@ -33,11 +33,14 @@
                         case 'IPV4_DST':
                             hideAndShow.call(this, ".value-ip");
                             break;
+                        case 'IPV6_SRC':
+                            hideAndShow.call(this, ".value-ip");
+                            break;
+                        case 'IPV6_DST':
+                            hideAndShow.call(this, ".value-ip");
+                            break;
                         case 'IN_PORT':
                             hideAndShow.call(this, ".value-port");
-                            break;
-                        case 'IP_PROTOCOL':
-                            hideAndShow.call(this, ".value-protocol");
                             break;
                         case 'TCP_SRC':
                             hideAndShow.call(this, ".value-tcp-port");
@@ -50,6 +53,9 @@
                             break;
                         case 'UDP_DST':
                             hideAndShow.call(this, ".value-udp-port");
+                            break;
+                        case 'IP_PROTO':
+                            hideAndShow.call(this, ".value-protocol");
                             break;
                         default:
                             console.log('Nieznany typ.');

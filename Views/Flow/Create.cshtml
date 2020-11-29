@@ -36,12 +36,6 @@
                 <label asp-for="treatment.instructions[0].type" class="control-label"></label>
                 <select asp-for="treatment.instructions[0].type" class="form-control"/>
                     <option>OUTPUT</option>
-                    <option>TABLE</option>
-                    <option>GROUP</option>
-                    <option>METER</option>
-                    <option>QUEUE</option>
-                    <option>L0MODIFICATION</option>
-                    <option>L1MODIFICATION</option>
                     <option>L2MODIFICATION</option>
                     <option>L3MODIFICATION</option>
                     <option>L4MODIFICATION</option>
@@ -57,44 +51,11 @@
             <div id="criteria">
                 @if ((Model.selector != null) && (Model.selector.criteria != null))
                 {
-                    @*@foreach (var criterion in Model.selector.criteria)
-                    {
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <label asp-for="@Model.selector.critera.type" class="control-label"></label>
-                            <input asp-for="@criterion.type" value="ETH_TYPE" class="form-control" />
-                            <span asp-validation-for="@criterion.type" class="text-danger"></span>
-                        </div>
-                    }*@
                 }
             </div>
             <div class="form-group">
                 <button id="addCriterion" type="button" class="btn btn-primary">Dodaj</button>
             </div>
-            @*<div class="form-group">
-                    <label asp-for="selector.criteria[2].type" class="control-label"></label>
-                    <select asp-for="selector.criteria[2].type" class="form-control">
-                        <option>ETH_TYPE</option>
-                        <option>ETH_DST</option>
-                        <option>ETH_SRC</option>
-                        <option>IN_PORT</option>
-                        <option>IP_PROTO</option>
-                        <option>IPV4_SRC</option>
-                        <option>IP4_DST</option>
-                        <option>TCP_SRC</option>
-                        <option>TCP_DST</option>
-                        <option>UDP_SRC</option>
-                        <option>UDP_DST</option>
-                        <option>IPV6_SRC</option>
-                        <option>IPV6_DST</option>
-                    </select>
-                    <span asp-validation-for="selector.criteria[2].type" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="selector.criteria[2].mac" class="control-label"></label>
-                    <input asp-for="selector.criteria[2].mac" class="form-control" />
-                    <span asp-validation-for="selector.criteria[2].mac" class="text-danger"></span>
-                </div>*@
             <div class="form-group">
                 <input type="submit" value="Stwórz" class="btn btn-primary" />
             </div>

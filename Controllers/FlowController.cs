@@ -121,63 +121,63 @@ namespace OnosFlow.Controllers
             return PartialView("_CriterionForm");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> EditConfirmed(string deviceId, Flow flow)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(flow);
-            }
-            try
-            {
-                var createFlow = await _onosService.PostFlow(deviceId, flow);
-                return RedirectToAction("Index");
-            }
-            catch (HttpRequestException e)
-            {
-                if (e.Message == "Response status code does not indicate success: 401 (Unauthorized).")
-                {
-                    return RedirectToAction("UnauthorizedRequest");
-                }
-                else
-                {
-                    string error = e.Message;
-                    string errorString = $"There was an error getting flows: { error }";
-                    return Content(errorString);
-                }
-            }
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> EditConfirmed(string deviceId, Flow flow)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(flow);
+        //    }
+        //    try
+        //    {
+        //        var createFlow = await _onosService.PostFlow(deviceId, flow);
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch (HttpRequestException e)
+        //    {
+        //        if (e.Message == "Response status code does not indicate success: 401 (Unauthorized).")
+        //        {
+        //            return RedirectToAction("UnauthorizedRequest");
+        //        }
+        //        else
+        //        {
+        //            string error = e.Message;
+        //            string errorString = $"There was an error getting flows: { error }";
+        //            return Content(errorString);
+        //        }
+        //    }
+        //}
 
-        [HttpGet]
-        public async Task<IActionResult> Edit(string deviceId, string flowId)
-        {
-            ViewData["flowId"] = flowId;
-            ViewData["deviceId"] = deviceId;
-            return View();
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> Edit(string deviceId, string flowId)
+        //{
+        //    ViewData["flowId"] = flowId;
+        //    ViewData["deviceId"] = deviceId;
+        //    return View();
+        //}
 
-        [HttpPost]
-        public async Task<IActionResult> DeleteConfirmed(string deviceId, string flowId)
-        {
-            try
-            {
-                var deleteFlow = await _onosService.DeleteFlow(deviceId, flowId);
-                return RedirectToAction("Index");
-            }
-            catch (HttpRequestException e)
-            {
-                if (e.Message == "Response status code does not indicate success: 401 (Unauthorized).")
-                {
-                    return RedirectToAction("UnauthorizedRequest");
-                }
-                else
-                {
-                    string error = e.Message;
-                    string errorString = $"There was an error deleting flow: { error }";
-                    return Content(errorString);
-                }
-            }
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> DeleteConfirmed(string deviceId, string flowId)
+        //{
+        //    try
+        //    {
+        //        var deleteFlow = await _onosService.DeleteFlow(deviceId, flowId);
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch (HttpRequestException e)
+        //    {
+        //        if (e.Message == "Response status code does not indicate success: 401 (Unauthorized).")
+        //        {
+        //            return RedirectToAction("UnauthorizedRequest");
+        //        }
+        //        else
+        //        {
+        //            string error = e.Message;
+        //            string errorString = $"There was an error deleting flow: { error }";
+        //            return Content(errorString);
+        //        }
+        //    }
+        //}
 
         [HttpGet]
         public IActionResult Delete(string deviceId, string flowId)
