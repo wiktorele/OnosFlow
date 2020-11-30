@@ -75,7 +75,11 @@ namespace OnosFlow.Models
         public async Task<HttpResponseMessage> PostFlow(string deviceId, Flow postFlow)
         {
             var response = await Client.PostAsJsonAsync($"v1/flows/{deviceId}", postFlow);
-            response.EnsureSuccessStatusCode();
+
+            if (response.StatusCode != System.Net.HttpStatusCode.BadRequest)
+            {
+                response.EnsureSuccessStatusCode();
+            }
 
             //var postResponse = await response.Content.ReadFromJsonAsync<Flow>();
 

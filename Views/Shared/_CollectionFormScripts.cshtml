@@ -80,18 +80,85 @@
                 });
                 $("#instructions").find('#treatment_instructions_' + id + '__type').change(function () {
                     let value = $(this).val();
+                    let l2subtypes = ["ETH_DST", "ETH_SRC", "VLAN_ID", "VLAN_PCP"];
+                    let l3subtypes = ["IPV4_SRC", "IPV4_DST", "IPV6_SRC", "IPV6_DST"];
+                    let l4subtypes = ["TCP_SRC", "TCP_DST", "UDP_SRC", "UDP_DST"];
+                    let options = "";
                     switch (value) {
                         case 'OUTPUT':
                             hideAndShowInstr.call(this, ".value-port");
                             break;
                         case 'L2MODIFICATION':
+                            $.each(l2subtypes, function (i, subtype) {
+                                options += '<option value="' + subtype + '">' + subtype + '</option>'
+                            });
+                            $('#treatment_instructions_' + id + '__subtype').html(options);
                             hideAndShowInstr.call(this, ".value-subtype");
+                            $("#instructions").find('#treatment_instructions_' + id + '__subtype').trigger('change');
                             break;
                         case 'L3MODIFICATION':
+                            $.each(l3subtypes, function (i, subtype) {
+                                options += '<option value="' + subtype + '">' + subtype + '</option>'
+                            });
+                            $('#treatment_instructions_' + id + '__subtype').html(options);
                             hideAndShowInstr.call(this, ".value-subtype");
+                            $("#instructions").find('#treatment_instructions_' + id + '__subtype').trigger('change');
                             break;
                         case 'L4MODIFICATION':
+                            $.each(l4subtypes, function (i, subtype) {
+                                options += '<option value="' + subtype + '">' + subtype + '</option>'
+                            });
+                            $('#treatment_instructions_' + id + '__subtype').html(options);
                             hideAndShowInstr.call(this, ".value-subtype");
+                            $("#instructions").find('#treatment_instructions_' + id + '__subtype').trigger('change');
+                            break;
+                        default:
+                            console.log('Nieznany typ.');
+                            break;
+                    }
+
+                });
+                $("#instructions").find('#treatment_instructions_' + id + '__subtype').change(function () {
+                    let value = $(this).val();
+                    switch (value) {
+                        //case 'ETH_TYPE':
+                        //    hideAndShowInstrSubtypeSubtype.call(this, ".value-");
+                        //    break;
+                        case 'ETH_SRC':
+                            hideAndShowInstrSubtype.call(this, ".value-mac");
+                            break;
+                        case 'ETH_DST':
+                            hideAndShowInstrSubtype.call(this, ".value-mac");
+                            break;
+                        case 'VLAN_ID':
+                            hideAndShowInstrSubtype.call(this, ".value-vlan-id");
+                            break;
+                        case 'VLAN_PCP':
+                            hideAndShowInstrSubtype.call(this, ".value-vlan-pcp");
+                            break;
+                        case 'IPV4_SRC':
+                            hideAndShowInstrSubtype.call(this, ".value-ip");
+                            break;
+                        case 'IPV4_DST':
+                            hideAndShowInstrSubtype.call(this, ".value-ip");
+                            break;
+                        case 'IPV6_SRC':
+                            hideAndShowInstrSubtype.call(this, ".value-ip");
+                            break;
+                        case 'IPV6_DST':
+                            hideAndShowInstrSubtype.call(this, ".value-ip");
+                            break;
+                        case 'TCP_SRC':
+                            hideAndShowInstrSubtype.call(this, ".value-tcp-port");
+                            break;
+                        case 'TCP_DST':
+                            hideAndShowInstrSubtype.call(this, ".value-tcp-port");
+                            break;
+                        case 'UDP_SRC':
+                            hideAndShowInstrSubtype.call(this, ".value-udp-port");
+                            break;
+                        case 'UDP_DST':
+                            hideAndShowInstrSubtype.call(this, ".value-udp-port");
                             break;
                         default:
                             console.log('Nieznany typ.');
@@ -110,7 +177,6 @@
             $(this).find(':input').prop("disabled", true);
         });
         $(this).siblings(attr).removeClass('d-none');
-        console.log($(this).find(':input'));
         $(this).siblings(attr).find(':input').prop("disabled", false);
     }
 
@@ -120,7 +186,15 @@
             $(this).find(':input').prop("disabled", true);
         });
         $(this).siblings(attr).removeClass('d-none');
-        console.log($(this).find(':input'));
         $(this).siblings(attr).find(':input').prop("disabled", false);
+    }
+
+    function hideAndShowInstrSubtype(attr) {
+        $(this).parent().siblings('.instruction-value').each(function () {
+            $(this).addClass('d-none');
+            $(this).find(':input').prop("disabled", true);
+        });
+        $(this).parent().siblings(attr).removeClass('d-none');
+        $(this).parent().siblings(attr).find(':input').prop("disabled", false);
     }
 </script>

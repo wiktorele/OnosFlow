@@ -13,13 +13,38 @@
             </div>
             <div class="instruction-value value-subtype d-none">
                 <label asp-for="treatment.instructions[id].subtype" class="control-label"></label>
-                <input asp-for="treatment.instructions[id].subtype" class="form-control" disabled="disabled" />
+                <select asp-for="treatment.instructions[id].subtype" class="form-control" disabled="disabled"></select>
                 <span asp-validation-for="@Model.treatment.instructions[id].subtype" class="text-danger"></span>
             </div>
             <div class="instruction-value value-mac d-none">
                 <label asp-for="treatment.instructions[id].mac" class="control-label"></label>
                 <input asp-for="treatment.instructions[id].mac" class="form-control" disabled="disabled" />
                 <span asp-validation-for="@Model.treatment.instructions[id].mac" class="text-danger"></span>
+            </div>
+            <div class="instruction-value value-ip d-none">
+                <label asp-for="treatment.instructions[id].ip" class="control-label"></label>
+                <input asp-for="treatment.instructions[id].ip" class="form-control" disabled="disabled" />
+                <span asp-validation-for="@Model.treatment.instructions[id].ip" class="text-danger"></span>
+            </div>
+            <div class="instruction-value value-tcp-port d-none">
+                <label asp-for="treatment.instructions[id].tcpPort" class="control-label"></label>
+                <input asp-for="treatment.instructions[id].tcpPort" class="form-control" disabled="disabled" />
+                <span asp-validation-for="@Model.treatment.instructions[id].tcpPort" class="text-danger"></span>
+            </div>
+            <div class="instruction-value value-udp-port d-none">
+                <label asp-for="treatment.instructions[id].udpPort" class="control-label"></label>
+                <input asp-for="treatment.instructions[id].udpPort" class="form-control" disabled="disabled" />
+                <span asp-validation-for="@Model.treatment.instructions[id].udpPort" class="text-danger"></span>
+            </div>
+            <div class="instruction-value value-vlan-id d-none">
+                <label asp-for="treatment.instructions[id].vlanId" class="control-label"></label>
+                <input asp-for="treatment.instructions[id].vlanId" class="form-control" disabled="disabled" />
+                <span asp-validation-for="@Model.treatment.instructions[id].vlanId" class="text-danger"></span>
+            </div>
+            <div class="instruction-value value-vlan-pcp d-none">
+                <label asp-for="treatment.instructions[id].vlanPcp" class="control-label"></label>
+                <input asp-for="treatment.instructions[id].vlanPcp" class="form-control" disabled="disabled" />
+                <span asp-validation-for="@Model.treatment.instructions[id].vlanPcp" class="text-danger"></span>
             </div>
             <button type="button" class="delete-instruction btn btn-danger mt-3">Usuń</button>
         </div>

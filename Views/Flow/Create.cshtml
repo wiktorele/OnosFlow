@@ -6,6 +6,12 @@
 
 <h1>Stwórz przepływ</h1>
 <hr />
+@if (ViewBag.error != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.error.message
+    </div>
+}
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">

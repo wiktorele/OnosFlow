@@ -84,9 +84,19 @@ namespace OnosFlow.Controllers
             }
             try
             {
-
+                //var jsonString = JsonSerializer.Serialize(flow);
+                //return Content(jsonString);
                 var createFlow = await _onosService.PostFlow(deviceId, flow);
-                return RedirectToAction("Index");
+                if (createFlow.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    var error = await createFlow.Content.ReadFromJsonAsync<ErrorResponse>();
+                    ViewBag.error = error;
+                    return View(flow);
+                }
             }
             catch (HttpRequestException e)
             {

@@ -71,19 +71,35 @@ namespace OnosFlow.Models
         public string tcpPort { get; set; }
         [Display(Name = "Port udp")]
         public string udpPort { get; set; }
-        public int vladId { get; set; }
-        public int vladPcp { get; set; }
+        [Display(Name = "Id wirtualnej sieci")]
+        public int vlanId { get; set; }
+        [Display(Name = "Priorytet wirtualnej sieci")]
+        public int vlanPcp { get; set; }
 
         public static IEnumerable<string> GetTypes()
         {
             return new[] { "OUTPUT", "L2MODIFICATION", "L3MODIFICATION", "L4MODIFICATION" };
         }
 
-        public static IEnumerable<string> GetSybTypes()
+        //public static IEnumerable<string> GetSubTypes()
+        //{
+        //    return new[] { "ETH_TYPE", "ETH_DST", "ETH_SRC", "IPV4_SRC", "IPV4_DST", "IPV6_SRC", "IPV6_DST", "TCP_SRC", "TCP_DST", "UDP_SRC", "UDP_DST", "VLAN_VID", "VLAN_PCP" };
+        //}
+
+        public static IEnumerable<string> GetL2SubTypes()
         {
-            return new[] { "ETH_TYPE", "ETH_DST", "ETH_SRC", "IPV4_SRC", "IPV4_DST", "IPV6_SRC", "IPV6_DST", "IN_PORT", "IP_PROTO", "TCP_SRC", "TCP_DST", "UDP_SRC", "UDP_DST", "VLAN_VID", "VLAN_PCP" };
+            return new[] { "ETH_DST", "ETH_SRC", "VLAN_ID", "VLAN_PCP" };
         }
 
+        public static IEnumerable<string> GetL3SubTypes()
+        {
+            return new[] { "IPV4_SRC", "IPV4_DST", "IPV6_SRC", "IPV6_DST" };
+        }
+
+        public static IEnumerable<string> GetL4SubTypes()
+        {
+            return new[] { "TCP_SRC", "TCP_DST", "UDP_SRC", "UDP_DST" };
+        }
     }
 
     public class Selector
